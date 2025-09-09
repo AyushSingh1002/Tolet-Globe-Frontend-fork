@@ -18,27 +18,23 @@ const Filters = ({
   selectedLocality,
 }) => {
   const [selectedCategory, setSelectedCategory] = useState(null);
-  const [pendingFilters, setPendingFilters] = useState(filters);
 
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const countAppliedFilters = (filters) => {
-      return Object.values(filters).reduce((count, filterValue) => {
-        if (Array.isArray(filterValue)) {
-          return count + (filterValue.length > 0 ? 1 : 0);
-        } else {
-          return count + (filterValue ? 1 : 0);
-        }
-      }, 0);
-    };
-    const totalFilters = countAppliedFilters(filters);
-    updateFilterCount(totalFilters);
-  }, [filters, updateFilterCount]);
-
-  useEffect(() => {
-    setPendingFilters(filters);
-  }, [filters]);
+  // useEffect(() => {
+  //   const countAppliedFilters = (filters) => {
+  //     return Object.values(filters).reduce((count, filterValue) => {
+  //       if (Array.isArray(filterValue)) {
+  //         return count + (filterValue.length > 0 ? 1 : 0);
+  //       } else {
+  //         return count + (filterValue ? 1 : 0);
+  //       }
+  //     }, 0);
+  //   };
+  //   const totalFilters = countAppliedFilters(filters);
+  //   updateFilterCount(totalFilters);
+  // }, [filters, updateFilterCount]);
+  const [pendingFilters, setPendingFilters] = useState(filters);
 
   const handlePendingFilterChange = (key, value) => {
     setPendingFilters((prev) => {
@@ -114,21 +110,21 @@ const Filters = ({
       <div
         className={`${
           isOpen ? "block" : "hidden"
-        } w-full lg:w-fit lg:bg-white bg-[#232323] p-4 lg:p-1 top-full left-0 mt-1 shadow-sm lg:rounded-xl`}
+        }w-full lg:w-fit  lg:bg-white  bg-[#232323] p-4 lg:p-1 top-full left-0 mt-1 
+ shadow-sm lg:rounded-xl`}
       >
         <div className="lg:hidden flex justify-between gap-1 pb-4">
-          <p className="text-xl text-white lg:text-black">Select Our Service</p>
+          <p className="text-xl">Select Our Service</p>
           {/* Close Button for Small Screens */}
           <button
-            className="relative right-2 text-white text-xl lg:hidden"
+            className="relative  right-2 text-white text-xl lg:hidden"
             onClick={(e) => SetIsOpen(false)}
-            aria-label="Close filters"
           >
             ✖
           </button>
         </div>
 
-        <div className="lg:flex gap-4 lg:gap-3 2xl:gap-[1.35rem] grid grid-cols-2 justify-items-center lg:justify-items-start">
+        <div className="lg:flex gap-4 lg:gap-3 2xl:gap-[1.35rem] grid grid-cols-2 justify-items-center lg:justify-items-start  ">
           {[
             { icon: BsHouseDoor, text: "House" },
             { icon: RiHotelBedLine, text: "PG" },
@@ -139,7 +135,7 @@ const Filters = ({
           ].map((item, index) => (
             <div
               key={index}
-              className="flex lg:flex-col flex-row justify-center items-center lg:w-[100px] w-[140px] cursor-pointer text-black bg-white hover:text-[#0c8a7e] lg:hover:bg-[#C8A21C] lg:hover:text-white rounded-xl py-1.5 border-black lg:border-none border gap-2 lg:gap-0"
+              className="flex lg:flex-col flex-row justify-center items-center lg:w-[100px] w-[140px]  cursor-pointer text-black bg-white  hover:text-[#0c8a7e] lg:hover:bg-[#C8A21C] lg:hover:text-white rounded-xl py-1.5 border-black lg:border-none border gap-2 lg:gap-0"
               onClick={() => handleCategoryClick(item.text)}
               onMouseEnter={() => {
                 if (
@@ -153,7 +149,7 @@ const Filters = ({
                 }
               }}
             >
-              <item.icon size={24} className="mb-2" />
+              <item.icon size={24} className="mb-2 " />
               <span className="text-xs pl-1 font-medium">{item.text}</span>
             </div>
           ))}
@@ -161,18 +157,18 @@ const Filters = ({
       </div>
 
       {selectedCategory === "House" && (
-        <div className="w-full lg:bg-white bg-[#232323] pt-2 shadow-md sm:ml-4 lg:ml-8 lg:my-2 lg:rounded-xl">
+        <div className=" w-full lg:bg-white bg-[#232323]  pt-2 shadow-md sm:ml-4 lg:ml-8 lg:my-2 lg:rounded-xl ">
           <div className="flex flex-col flex-wrap gap-5 lg:gap-4">
             <div className="flex flex-col">
               <h3 className="text-left font-medium mb-3 px-4 lg:text-black text-white">
                 BHK
               </h3>
-              <div className="flex flex-row flex-wrap gap-[2.5rem] pl-[2rem]">
+              <div className="flex flex-row flex-wrap gap-[2.5rem] pl-[2rem] ">
                 {["+ 1 BHK", "+ 2 BHK", "+ 3 BHK", "+ 4 BHK", "+ >4 BHK"].map(
                   (bhk) => (
                     <label
                       key={bhk}
-                      className="flex items-center gap-2 cursor-pointer"
+                      className="flex items-center gap-2 cursor-pointer "
                     >
                       <input
                         type="checkbox"
@@ -191,7 +187,7 @@ const Filters = ({
               </div>
             </div>
 
-            <div className="flex flex-col">
+            <div className="flex flex-col ">
               <h3 className="text-left font-medium mb-3 lg:text-black text-white px-4">
                 House Type
               </h3>
@@ -225,7 +221,7 @@ const Filters = ({
               <h3 className="text-left font-medium mb-3 lg:text-black text-white px-4">
                 Preference
               </h3>
-              <div className="flex flex-row gap-4 pl-[2rem]">
+              <div className="flex flex-row  gap-4 pl-[2rem]">
                 {["Family", "Bachelors"].map((preference) => (
                   <label
                     key={preference}
@@ -236,7 +232,7 @@ const Filters = ({
                       name="preferenceHousing"
                       value={preference}
                       checked={pendingFilters.preferenceHousing === preference}
-                      onChange={() =>
+                      onClick={() =>
                         handlePendingFilterChange(
                           "preferenceHousing",
                           preference
@@ -252,11 +248,10 @@ const Filters = ({
               </div>
             </div>
 
-            <div className="flex justify-between gap-4 p-4 px-4 bg-[#1a1a1a] lg:bg-white">
+            <div className="flex justify-between gap-4 p-[1rem] bg-[#1a1a1a] lg:bg-white">
               <button
                 onClick={resetFilters}
                 className="px-4 py-2 text-blue-600 hover:text-blue-800 font-medium"
-                aria-label="Clear filters"
               >
                 Clear
               </button>
@@ -268,14 +263,14 @@ const Filters = ({
                   queryParams.set("residential", "House");
                   queryParams.delete("commercial");
 
-                  if (pendingFilters.bhk.length > 0)
-                    queryParams.set("bhk", pendingFilters.bhk.join(","));
-                  if (pendingFilters.houseType.length > 0)
-                    queryParams.set("houseType", pendingFilters.houseType.join(","));
-                  if (pendingFilters.preferenceHousing)
+                  if (filters.bhk.length > 0)
+                    queryParams.set("bhk", filters.bhk.join(","));
+                  if (filters.houseType.length > 0)
+                    queryParams.set("houseType", filters.houseType.join(","));
+                  if (filters.preferenceHousing)
                     queryParams.set(
                       "preferenceHousing",
-                      pendingFilters.preferenceHousing
+                      filters.preferenceHousing
                     );
 
                   navigate(`?${queryParams.toString()}`);
@@ -288,7 +283,6 @@ const Filters = ({
                   SetIsOpen(false);
                 }}
                 className="px-4 py-2 text-blue-600 hover:text-blue-800 font-medium"
-                aria-label="Apply filters"
               >
                 Done
               </button>
@@ -298,8 +292,8 @@ const Filters = ({
       )}
 
       {selectedCategory === "Flats" && (
-        <div className="w-full lg:bg-white bg-[#232323] py-2 shadow-md sm:ml-4 lg:ml-8 lg:my-2 lg:rounded-xl">
-          <div className="flex flex-col lg:gap-4 gap-5">
+        <div className="w-full lg:bg-white bg-[#232323]  py-2 shadow-md sm:ml-4 lg:ml-8 lg:my-2 lg:rounded-xl">
+          <div className="flex flex-col lg:gap-4 gap-5 ">
             <div className="flex flex-col">
               <h3 className="text-left font-medium mb-3 lg:text-black text-white px-4">
                 BHK
@@ -329,7 +323,7 @@ const Filters = ({
             </div>
 
             <div className="flex flex-col gap-3">
-              <h3 className="text-left font-medium mb-3 lg:text-black text-white px-4">
+              <h3 className="text-left font-medium mb-3lg:text-black gap-3 text-white lg:text-black px-4">
                 Flats Type
               </h3>
               <div className="flex flex-row gap-4 pl-4">
@@ -389,11 +383,10 @@ const Filters = ({
               </div>
             </div>
 
-            <div className="flex justify-between gap-4 p-4 px-4 bg-[#1a1a1a] lg:bg-white">
+            <div className="flex justify-between gap-4  bg-[#1a1a1a] lg:bg-white">
               <button
                 onClick={resetFilters}
                 className="px-4 py-2 text-blue-600 hover:text-blue-800 font-medium"
-                aria-label="Clear filters"
               >
                 Clear
               </button>
@@ -404,14 +397,14 @@ const Filters = ({
                   queryParams.set("residential", "Flat");
                   queryParams.delete("commercial");
 
-                  if (pendingFilters.bhk.length > 0)
-                    queryParams.set("bhk", pendingFilters.bhk.join(","));
-                  if (pendingFilters.houseType.length > 0)
-                    queryParams.set("houseType", pendingFilters.houseType.join(","));
-                  if (pendingFilters.preferenceHousing)
+                  if (filters.bhk.length > 0)
+                    queryParams.set("bhk", filters.bhk.join(","));
+                  if (filters.houseType.length > 0)
+                    queryParams.set("houseType", filters.houseType.join(","));
+                  if (filters.preferenceHousing)
                     queryParams.set(
                       "preferenceHousing",
-                      pendingFilters.preferenceHousing
+                      filters.preferenceHousing
                     );
 
                   navigate(`?${queryParams.toString()}`);
@@ -424,7 +417,6 @@ const Filters = ({
                   SetIsOpen(false);
                 }}
                 className="px-4 py-2 text-blue-600 hover:text-blue-800 font-medium"
-                aria-label="Apply filters"
               >
                 Done
               </button>
@@ -434,14 +426,14 @@ const Filters = ({
       )}
 
       {selectedCategory === "PG" && (
-        <div className="w-full lg:bg-white bg-[#232323] py-2 shadow-md sm:ml-4 lg:ml-8 lg:my-2 lg:rounded-xl">
+        <div className="w-full lg:bg-white bg-[#232323]  py-2 shadow-md sm:ml-4 lg:ml-8 lg:my-2 lg:rounded-xl">
           <div className="flex flex-col gap-4">
             <div className="flex flex-col">
               <h3 className="text-left font-medium mb-3 lg:text-black text-white px-4">
                 Preference
               </h3>
               <div className="flex flex-row gap-4 px-4">
-                {["Girls", "Boys", "Any"].map((gender) => (
+                {["Girls", "Boys", "Any", "Family", "Bachelors"].map((gender) => (
                   <label
                     key={gender}
                     className="flex items-center gap-2 cursor-pointer"
@@ -464,11 +456,10 @@ const Filters = ({
               </div>
             </div>
 
-            <div className="flex justify-between gap-4 p-4 px-4 bg-[#1a1a1a] lg:bg-white">
+            <div className="flex justify-between gap-4  bg-[#1a1a1a]  lg:bg-white">
               <button
                 onClick={resetFilters}
                 className="px-4 py-2 text-blue-600 hover:text-blue-800 font-medium"
-                aria-label="Clear filters"
               >
                 Clear
               </button>
@@ -479,10 +470,10 @@ const Filters = ({
                   let queryParams = new URLSearchParams();
                   queryParams.set("residential", "PG");
                   queryParams.delete("commercial");
-                  if (pendingFilters.genderPreference) {
+                  if (filters.genderPreference) {
                     queryParams.set(
                       "genderPreference",
-                      pendingFilters.genderPreference
+                      filters.genderPreference
                     );
                   }
                   navigate(`?${queryParams.toString()}`);
@@ -495,7 +486,6 @@ const Filters = ({
                   SetIsOpen(false);
                 }}
                 className="px-4 py-2 text-blue-600 hover:text-blue-800 font-medium"
-                aria-label="Apply filters"
               >
                 Done
               </button>
