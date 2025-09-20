@@ -1,7 +1,5 @@
 
-
 import React from "react";
-
 // Icons
 import Bedrooms from "./assets/Features/Bedrooms.svg";
 import Bathrooms from "./assets/Features/Bathrooms.svg";
@@ -29,6 +27,15 @@ const Features = ({ selectComp, property }) => {
     >
       <p className="text-black block font-semibold text-xl mb-2">Features</p>
       <div className="grid grid-cols-2 md:grid-cols-5 gap-3 lg:flex lg:flex-wrap lg:gap-10">
+        {shouldDisplay(property.ownerLocation) && (
+          <div className="border flex justify-between rounded-lg border-black p-2 w-full sm:w-fit items-center px-3 py-1">
+            <img src={Bedrooms} className="h-6 w-6 mr-4 my-auto" />
+            <p className="inline font-normal text-sm md:text-md lg:text-lg">
+              Owner {property.ownerLocation.toLowerCase() || "Unknown location"}
+            </p>
+          </div>
+        )}
+
         {shouldDisplay(property.bhk) && (
           <div className="border flex justify-between rounded-lg border-black p-2 w-full sm:w-fit items-center px-3 py-1">
             <img src={Bedrooms} className="h-6 w-6 mr-4 my-auto" />
